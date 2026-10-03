@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <title>Test Finexa - First Page</title>
+</head>
+
+<body>
+
+    <main>
+
+        <!-- LADO ESQUERDO -->
+        <div class="img-finace_control">
+
+            <img src="https://img.magnific.com/premium-photo/abstract-purple-data-visualization-growth-progress-finance_1276746-15206.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Controle financeiro">
+
+        </div>
+
+
+        <!-- LADO DIREITO -->
+        <div class="block1">
+
+            <div class="logo">
+                <h1>Finexa</h1>
+            </div>
+
+            <p>Create your account</p>
+
+            <form id="formUsuario">
+
+                <label for="nome">Name:</label>
+                <input type="text" id="nome" name="nome" required>
+                <span id="erroNome" class="erro"></span>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="erroEmail" class="erro"></span>
+
+                <label for="senha">Password:</label>
+                <input type="password" id="senha" name="senha" required>
+                <span id="erroSenha" class="erro"></span>
+
+                <input type="submit" value="Create Account">
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Finexa. All rights reserved.</p>
+    </footer>
+
+    <div id="modalSucesso" class="modal-sucesso">
+
+        <div class="modal-conteudo">
+
+            <h2>Cadastro realizado!</h2>
+
+            <p id="mensagemUsuario"></p>
+
+            <button id="fecharModal">Continuar</button>
+
+        </div>
+
+    </div>
+
+    <script src="../services/script.js"></script>
+
+</body>
+
+</html>
