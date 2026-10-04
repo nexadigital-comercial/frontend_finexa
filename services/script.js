@@ -2,6 +2,8 @@ const modalSucesso = document.getElementById("modalSucesso");
 const mensagemUsuario = document.getElementById("mensagemUsuario");
 const fecharModal = document.getElementById("fecharModal");
 
+const tituloModal = document.getElementById("tituloModal");
+
 const form = document.getElementById("formUsuario");
 const btnCadastrar = document.getElementById("btnCadastrar");
 
@@ -90,6 +92,11 @@ form.addEventListener("submit", async (event) => {
         console.log("Usuário criado:", data);
 
 
+        // Define o título do modal
+
+        tituloModal.textContent = "Cadastro realizado!";
+
+
         // Preenche o modal
 
         mensagemUsuario.innerHTML = `
@@ -113,6 +120,11 @@ form.addEventListener("submit", async (event) => {
         console.error("Erro ao cadastrar usuário:", error);
 
 
+        // Define o título do modal para erro
+
+        tituloModal.textContent = "Erro ao realizar cadastro";
+
+
         mensagemUsuario.textContent =
             "Não foi possível conectar ao servidor.";
 
@@ -122,6 +134,7 @@ form.addEventListener("submit", async (event) => {
     } finally {
 
         // Libera o botão após a resposta do backend
+
         btnCadastrar.disabled = false;
         btnCadastrar.value = "Create Account";
 
