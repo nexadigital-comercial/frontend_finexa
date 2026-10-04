@@ -140,6 +140,11 @@ main {
     box-shadow: 0 0 0 3px rgba(55, 0, 92, 0.15);
 }
 
+#btnCadastrar:disabled {
+    background-color: #808080;
+    cursor: not-allowed;
+}
+
 #formUsuario input[type="submit"] {
     margin-top: 10px;
 

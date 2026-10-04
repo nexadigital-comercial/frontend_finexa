@@ -3,6 +3,7 @@ const mensagemUsuario = document.getElementById("mensagemUsuario");
 const fecharModal = document.getElementById("fecharModal");
 
 const form = document.getElementById("formUsuario");
+const btnCadastrar = document.getElementById("btnCadastrar");
 
 const erroNome = document.getElementById("erroNome");
 const erroEmail = document.getElementById("erroEmail");
@@ -12,6 +13,10 @@ const erroSenha = document.getElementById("erroSenha");
 form.addEventListener("submit", async (event) => {
 
     event.preventDefault();
+
+    // Desabilita o botão enquanto aguarda o backend
+    btnCadastrar.disabled = true;
+    btnCadastrar.value = "Creating...";
 
 
     // Limpa mensagens anteriores
@@ -68,8 +73,9 @@ form.addEventListener("submit", async (event) => {
                 erroSenha.textContent = erros.senha;
             }
 
+
             if (erros.erro) {
-            erroEmail.textContent = erros.erro;
+                erroEmail.textContent = erros.erro;
             }
 
 
@@ -87,8 +93,8 @@ form.addEventListener("submit", async (event) => {
         // Preenche o modal
 
         mensagemUsuario.innerHTML = `
-            Bem-vindo ao Finexa, ${data.nome}!<br>
-            ${data.email}
+            Bem-vindo a Finexa, ${data.nome}!<br>
+            Este é seu E-mail de Usuário: ${data.email}
         `;
 
 
@@ -111,6 +117,13 @@ form.addEventListener("submit", async (event) => {
             "Não foi possível conectar ao servidor.";
 
         modalSucesso.style.display = "flex";
+
+
+    } finally {
+
+        // Libera o botão após a resposta do backend
+        btnCadastrar.disabled = false;
+        btnCadastrar.value = "Create Account";
 
     }
 
