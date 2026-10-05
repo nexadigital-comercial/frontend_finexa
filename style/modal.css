@@ -1,0 +1,55 @@
+/* =========================
+   MENSAGEM DE CADASTRO
+========================= */
+
+.modal-sucesso {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    width: 400px;
+    max-width: 90%;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-conteudo h2 {
+    margin-bottom: 15px;
+}
+
+.modal-conteudo p {
+    margin-bottom: 25px;
+}
+
+.modal-conteudo button {
+    padding: 10px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.modal-conteudo button:hover {
+    background-color: var(--principal-color);
+    transition: 0.3s;
+    color: white;
+}

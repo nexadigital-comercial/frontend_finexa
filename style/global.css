@@ -1,0 +1,19 @@
+:root {
+    --principal-color: rgb(55, 0, 92);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
