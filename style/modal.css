@@ -16,6 +16,10 @@
     z-index: 1000;
 }
 
+.success-icon {
+    color: var(--principal-color);
+}
+
 .modal-content {
     width: 400px;
     max-width: 90%;
