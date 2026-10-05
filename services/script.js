@@ -1,15 +1,15 @@
-const modalSucesso = document.getElementById("modalSucesso");
-const mensagemUsuario = document.getElementById("mensagemUsuario");
-const fecharModal = document.getElementById("fecharModal");
+const modalResponse = document.getElementById("modalResponse");
+const userMessage = document.getElementById("userMessage");
+const closeModal = document.getElementById("closeModal");
 
-const tituloModal = document.getElementById("tituloModal");
+const titleModal = document.getElementById("titleModal");
 
-const form = document.getElementById("formUsuario");
-const btnCadastrar = document.getElementById("btnCadastrar");
+const form = document.getElementById("userForm");
+const btnRegister = document.getElementById("btnRegister");
 
-const erroNome = document.getElementById("erroNome");
+const erroName = document.getElementById("erroName");
 const erroEmail = document.getElementById("erroEmail");
-const erroSenha = document.getElementById("erroSenha");
+const erroPassword = document.getElementById("erroPassword");
 
 
 form.addEventListener("submit", async (event) => {
@@ -17,23 +17,23 @@ form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     // Desabilita o botão enquanto aguarda o backend
-    btnCadastrar.disabled = true;
-    btnCadastrar.value = "Creating...";
+    btnRegister.disabled = true;
+    btnRegister.value = "Creating...";
 
 
     // Limpa mensagens anteriores
 
-    erroNome.textContent = "";
+    erroName.textContent = "";
     erroEmail.textContent = "";
-    erroSenha.textContent = "";
+    erroPassword.textContent = "";
 
 
     // Captura os dados do formulário
 
     const usuario = {
-        nome: document.getElementById("nome").value,
+        nome: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
+        senha: document.getElementById("password").value
     };
 
 
@@ -62,7 +62,7 @@ form.addEventListener("submit", async (event) => {
 
 
             if (erros.nome) {
-                erroNome.textContent = erros.nome;
+                erroName.textContent = erros.nome;
             }
 
 
@@ -72,7 +72,7 @@ form.addEventListener("submit", async (event) => {
 
 
             if (erros.senha) {
-                erroSenha.textContent = erros.senha;
+                erroPassword.textContent = erros.senha;
             }
 
 
@@ -94,20 +94,20 @@ form.addEventListener("submit", async (event) => {
 
         // Define o título do modal
 
-        tituloModal.textContent = "Cadastro realizado!";
+        titleModal.textContent = "Registration complete!";
 
 
         // Preenche o modal
 
-        mensagemUsuario.innerHTML = `
-            Bem-vindo a Finexa, ${data.nome}!<br>
-            Este é seu E-mail de Usuário: ${data.email}
+        userMessage.innerHTML = `
+            Welcome to Finexa, ${data.nome}!<br>
+            This is your User Email: ${data.email}
         `;
 
 
         // Abre o modal
 
-        modalSucesso.style.display = "flex";
+        modalResponse.style.display = "flex";
 
 
         // Limpa o formulário
@@ -117,34 +117,33 @@ form.addEventListener("submit", async (event) => {
 
     } catch (error) {
 
-        console.error("Erro ao cadastrar usuário:", error);
+        console.error("Error creating user:", error);
 
 
         // Define o título do modal para erro
 
-        tituloModal.textContent = "Erro ao realizar cadastro";
+        titleModal.textContent = "Error creating account";
 
 
-        mensagemUsuario.textContent =
-            "Não foi possível conectar ao servidor.";
+        userMessage.textContent =
+            "Could not connect to the server.";
 
-        modalSucesso.style.display = "flex";
+        modalResponse.style.display = "flex";
 
 
     } finally {
 
         // Libera o botão após a resposta do backend
 
-        btnCadastrar.disabled = false;
-        btnCadastrar.value = "Create Account";
+        btnRegister.disabled = false;
+        btnRegister.value = "Create Account";
 
     }
 
 });
 
+closeModal.addEventListener("click", () => {
 
-fecharModal.addEventListener("click", () => {
-
-    modalSucesso.style.display = "none";
+    modalResponse.style.display = "none";
 
 });

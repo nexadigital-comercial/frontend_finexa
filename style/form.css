@@ -2,7 +2,7 @@
    FORMULÁRIO
 ========================= */
 
-#formUsuario {
+#userForm {
     width: 100%;
     max-width: 400px;
 
@@ -10,13 +10,13 @@
     flex-direction: column;
 }
 
-#formUsuario label {
+#userForm label {
     margin-bottom: 8px;
 
     font-weight: bold;
 }
 
-#formUsuario input {
+#userForm input {
     width: 100%;
 
     padding: 14px;
@@ -31,19 +31,19 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#formUsuario input:focus {
+#userForm input:focus {
     outline: none;
 
     border-color: var(--principal-color);
     box-shadow: 0 0 0 3px rgba(55, 0, 92, 0.15);
 }
 
-#btnCadastrar:disabled {
+#btnRegister:disabled {
     background-color: #808080;
     cursor: not-allowed;
 }
 
-#formUsuario input[type="submit"] {
+#userForm input[type="submit"] {
     margin-top: 10px;
 
     padding: 14px;
@@ -63,6 +63,6 @@
     transition: 0.3s;
 }
 
-#formUsuario input[type="submit"]:hover {
+#userForm input[type="submit"]:hover {
     background-color: #2a0068;
 }

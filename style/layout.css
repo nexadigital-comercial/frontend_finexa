@@ -37,7 +37,7 @@ main {
     LOGO
 =================== */
 
-.logo {
+.headline {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -46,7 +46,7 @@ main {
     color: var(--principal-color);
 }
 
-.logo h1 {
+.headline h1 {
     font-size: 40px;
 }
 
@@ -55,7 +55,7 @@ main {
    BLOCO DO FORMULÁRIO
 ========================= */
 
-.block1 {
+.registrationForm {
     width: 50%;
     min-height: 100vh;
 
@@ -68,12 +68,12 @@ main {
     padding: 40px;
 }
 
-.block1 h1 {
+.registrationForm h1 {
     color: var(--principal-color);
     margin-bottom: 5px;
 }
 
-.block1 p {
+.registrationForm p {
     font-size: 22px;
     font-weight: bold;
 
