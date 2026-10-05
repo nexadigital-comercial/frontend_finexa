@@ -2,7 +2,7 @@
    MENSAGEM DE CADASTRO
 ========================= */
 
-.modal-sucesso {
+.modal-response {
     position: fixed;
     inset: 0;
 
@@ -16,7 +16,7 @@
     z-index: 1000;
 }
 
-.modal-conteudo {
+.modal-content {
     width: 400px;
     max-width: 90%;
 
@@ -31,15 +31,15 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.modal-conteudo h2 {
+.modal-content h2 {
     margin-bottom: 15px;
 }
 
-.modal-conteudo p {
+.modal-content p {
     margin-bottom: 25px;
 }
 
-.modal-conteudo button {
+.modal-content button {
     padding: 10px 25px;
 
     border: none;
@@ -48,7 +48,7 @@
     cursor: pointer;
 }
 
-.modal-conteudo button:hover {
+.modal-content button:hover {
     background-color: var(--principal-color);
     transition: 0.3s;
     color: white;
