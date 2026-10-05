@@ -1,5 +1,6 @@
 :root {
     --principal-color: rgb(55, 0, 92);
+    --background-color: #ffffff;
 }
 
 * {
@@ -15,5 +16,5 @@ html, body {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: var(--background-color);
 }

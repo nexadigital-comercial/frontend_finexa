@@ -66,3 +66,76 @@
 #userForm input[type="submit"]:hover {
     background-color: #2a0068;
 }
+
+.input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* #userForm na frente para vencer a regra "#userForm input" */
+#userForm .input-container input {
+    margin-bottom: 0;
+    padding: 14px 14px 14px 44px;
+}
+
+/* o Lucide transforma <i> em <svg>, por isso as duas regras */
+.input-container i,
+.input-container svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 18px;
+    height: 18px;
+
+    color: var(--principal-color);
+    pointer-events: none;
+}
+
+/* espaço à direita para o texto não passar por cima do olhinho */
+#userForm .input-container input#password {
+    padding-right: 48px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    color: var(--principal-color);
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* mostra só um dos dois ícones por vez */
+.toggle-password .icon-eye-off {
+    display: none;
+}
+
+.toggle-password.showing .icon-eye {
+    display: none;
+}
+
+.toggle-password.showing .icon-eye-off {
+    display: block;
+}
