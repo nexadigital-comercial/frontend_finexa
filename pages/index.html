@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" href="../assets/favicon_finexa.png" type="image/x-icon">
+
     <link rel="stylesheet" href="../style/global.css">
     <link rel="stylesheet" href="../style/layout.css">
     <link rel="stylesheet" href="../style/form.css">
     <link rel="stylesheet" href="../style/modal.css">
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <title>Finexa - registration screen</title>
+
 </head>
 
 <body>
@@ -22,6 +26,11 @@
 
             <img src="https://img.magnific.com/premium-photo/abstract-purple-data-visualization-growth-progress-finance_1276746-15206.jpg?semt=ais_hybrid&w=740&q=80"
                 alt="Financial Control Image">
+
+            <div class="motivational-message">
+                <h2>Take control of your finances with clarity.</h2>
+                <p>Track, plan and grow, all in one place.</p>
+            </div>
 
         </div>
 
@@ -38,15 +47,28 @@
             <form id="userForm">
 
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="nome" required>
+                <div class="input-container">
+                    <i data-lucide="user"></i>
+                    <input type="text" id="name" name="nome" required>
+                </div>
                 <span id="erroName" class="erro"></span>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <div class="input-container">
+                    <i data-lucide="mail"></i>
+                    <input type="email" id="email" name="email" required>
+                </div>
                 <span id="erroEmail" class="erro"></span>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="senha" required>
+                <div class="input-container">
+                    <i data-lucide="lock"></i>
+                    <input type="password" id="password" name="senha" required>
+                    <button type="button" id="togglePassword" class="toggle-password" aria-label="Show password">
+                    <i data-lucide="eye" class="icon-eye"></i>
+                    <i data-lucide="eye-off" class="icon-eye-off"></i>
+                </button>
+                </div>
                 <span id="erroPassword" class="erro"></span>
 
                 <input type="submit" id="btnRegister" value="Create Account">
@@ -75,7 +97,8 @@
 
     </div>
 
-    <script src="../services/script.js"></script>
+    <script src="../services/icons.js"></script>
+    <script src="../services/cadastro.js"></script>
 
 </body>
 
