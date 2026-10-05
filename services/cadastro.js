@@ -11,6 +11,8 @@ const erroName = document.getElementById("erroName");
 const erroEmail = document.getElementById("erroEmail");
 const erroPassword = document.getElementById("erroPassword");
 
+const emailInput = document.getElementById("email");
+
 
 form.addEventListener("submit", async (event) => {
 
@@ -26,6 +28,8 @@ form.addEventListener("submit", async (event) => {
     erroName.textContent = "";
     erroEmail.textContent = "";
     erroPassword.textContent = "";
+
+    emailInput.classList.remove("input-error");
 
 
     // Captura os dados do formulário
@@ -72,12 +76,14 @@ form.addEventListener("submit", async (event) => {
 
 
             if (erros.senha) {
-                erroPassword.textContent = erros.senha;
+                erroPassword.textContent = "A senha deve ter pelo menos 6 caracteres.";
+                passwordInput.classList.add("input-error");
             }
 
 
             if (erros.erro) {
-                erroEmail.textContent = erros.erro;
+                erroEmail.textContent = "Este e-mail já está cadastrado.";
+                emailInput.classList.add("input-error");
             }
 
 
@@ -101,7 +107,7 @@ form.addEventListener("submit", async (event) => {
 
         userMessage.innerHTML = `
             Welcome to Finexa, ${data.nome}!<br>
-            This is your User Email: ${data.email}
+            This is your user Email: ${data.email}
         `;
 
 

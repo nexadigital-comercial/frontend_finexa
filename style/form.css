@@ -31,6 +31,11 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.erro {
+    display: block;
+    margin-bottom: 10px;
+}
+
 #userForm input:focus {
     outline: none;
 
@@ -138,4 +143,22 @@
 
 .toggle-password.showing .icon-eye-off {
     display: block;
+}
+
+.input-error {
+    border: 2px solid red !important;
+}
+
+.registrationForm a {
+    margin-top: 20px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: var(--principal-color);
+    font-weight: bold;
+}
+
+.registrationForm a:hover {
+    text-decoration: underline;
 }
