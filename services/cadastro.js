@@ -15,141 +15,145 @@ const emailInput = document.getElementById("email");
 
 
 form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    event.preventDefault();
+  // Desabilita o botão enquanto aguarda o backend
+  btnRegister.disabled = true;
+  btnRegister.value = "Creating...";
 
-    // Desabilita o botão enquanto aguarda o backend
-    btnRegister.disabled = true;
-    btnRegister.value = "Creating...";
+  // Limpa mensagens anteriores
 
+  erroName.textContent = "";
+  erroEmail.textContent = "";
+  erroPassword.textContent = "";
 
-    // Limpa mensagens anteriores
+  emailInput.classList.remove("input-error");
 
-    erroName.textContent = "";
-    erroEmail.textContent = "";
-    erroPassword.textContent = "";
+  // Captura os dados do formulário
 
-    emailInput.classList.remove("input-error");
+  const usuario = {
+    nome: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    senha: document.getElementById("password").value,
+  };
 
+  try {
+    // Busca o token CSRF antes do cadastro
+    const csrfResponse = await fetch("http://localhost:8080/auth/csrf", {
+      method: "GET",
+      credentials: "include",
+    });
 
-    // Captura os dados do formulário
+    if (!csrfResponse.ok) {
+      throw new Error("Não foi possível obter o token CSRF.");
+    }
 
-    const usuario = {
-        nome: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        senha: document.getElementById("password").value
-    };
+    const csrfData = await csrfResponse.json();
 
+    // Verifica se os dados do CSRF foram recebidos
+    console.log("Header CSRF:", csrfData.headerName);
+    console.log("Token recebido:", Boolean(csrfData.token));
+    console.log(
+      "Cookie CSRF encontrado:",
+      document.cookie.includes("XSRF-TOKEN="),
+    );
 
-    try {
+    // Envia os dados do cadastro
+    const response = await fetch("http://localhost:8080/usuarios", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        [csrfData.headerName]: csrfData.token,
+      },
+      body: JSON.stringify(usuario),
+    });
 
-        // Envia os dados para o backend
+    if (!response.ok) {
+      const erros = await response.json();
 
-        const response = await fetch("http://localhost:8080/usuarios", {
+      console.log("Status HTTP:", response.status);
+      console.log("Código do erro:", erros.code);
+      console.log("Resposta do backend:", erros);
 
-            method: "POST",
+      // Exibe os erros específicos dos campos
+      const fieldErrors = erros.fieldErrors ?? {};
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+      if (fieldErrors.nome) {
+        erroName.textContent = fieldErrors.nome;
+      }
 
-            body: JSON.stringify(usuario)
+      if (fieldErrors.email) {
+        erroEmail.textContent = fieldErrors.email;
+      }
 
-        });
+      if (fieldErrors.senha) {
+        erroPassword.textContent = fieldErrors.senha;
+        document.getElementById("password").classList.add("input-error");
+      }
 
+      // Trata e-mail duplicado
+      if (erros.code === "EMAIL_ALREADY_EXISTS") {
+        erroEmail.textContent = erros.message;
+        emailInput.classList.add("input-error");
+      }
 
-        // Se o backend retornar erro
+      // Trata outros erros retornados pela API
+      if (
+        erros.code !== "VALIDATION_ERROR" &&
+        erros.code !== "EMAIL_ALREADY_EXISTS"
+      ) {
+        titleModal.textContent = "Error creating account";
+        userMessage.textContent =
+          erros.message || "Não foi possível concluir o cadastro.";
+        modalResponse.style.display = "flex";
+      }
 
-        if (!response.ok) {
+      return;
+    }
 
-            const erros = await response.json();
+    // Cadastro realizado com sucesso
 
+    const data = await response.json();
 
-            if (erros.nome) {
-                erroName.textContent = erros.nome;
-            }
+    console.log("Usuário criado:", data);
 
+    // Define o título do modal
 
-            if (erros.email) {
-                erroEmail.textContent = erros.email;
-            }
+    titleModal.textContent = "Registration complete!";
 
+    // Preenche o modal
 
-            if (erros.senha) {
-                erroPassword.textContent = "A senha deve ter pelo menos 6 caracteres.";
-                passwordInput.classList.add("input-error");
-            }
-
-
-            if (erros.erro) {
-                erroEmail.textContent = "Este e-mail já está cadastrado.";
-                emailInput.classList.add("input-error");
-            }
-
-
-            return;
-        }
-
-
-        // Cadastro realizado com sucesso
-
-        const data = await response.json();
-
-        console.log("Usuário criado:", data);
-
-
-        // Define o título do modal
-
-        titleModal.textContent = "Registration complete!";
-
-
-        // Preenche o modal
-
-        userMessage.innerHTML = `
+    userMessage.innerHTML = `
             Welcome to Finexa, ${data.nome}!<br>
             This is your user Email: ${data.email}
         `;
 
+    // Abre o modal
 
-        // Abre o modal
+    modalResponse.style.display = "flex";
 
-        modalResponse.style.display = "flex";
+    // Limpa o formulário
 
+    form.reset();
+  } catch (error) {
+    console.error("Error creating user:", error);
 
-        // Limpa o formulário
+    // Define o título do modal para erro
 
-        form.reset();
+    titleModal.textContent = "Error creating account";
 
+    userMessage.textContent = "Could not connect to the server.";
 
-    } catch (error) {
+    modalResponse.style.display = "flex";
+  } finally {
+    // Libera o botão após a resposta do backend
 
-        console.error("Error creating user:", error);
-
-
-        // Define o título do modal para erro
-
-        titleModal.textContent = "Error creating account";
-
-
-        userMessage.textContent =
-            "Could not connect to the server.";
-
-        modalResponse.style.display = "flex";
-
-
-    } finally {
-
-        // Libera o botão após a resposta do backend
-
-        btnRegister.disabled = false;
-        btnRegister.value = "Create Account";
-
-    }
-
+    btnRegister.disabled = false;
+    btnRegister.value = "Create Account";
+  }
 });
 
 closeModal.addEventListener("click", () => {
-
-    modalResponse.style.display = "none";
-
+  modalResponse.style.display = "none";
 });
